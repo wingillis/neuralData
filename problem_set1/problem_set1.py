@@ -81,6 +81,24 @@ def good_AP_finder(time,voltage):
     
     ##Your Code Here!
     
+    # Approach: find the maximum voltage within a window of 
+    # about 2ms and call that a spike
+    increasing = True
+    std = np.std(voltage)
+    threshold = 3 * std
+    
+    prevVoltage = None
+    maxVolt = 0
+    for index, volt in enumerate(voltage[:-1]):
+        if volt >= threshold:
+            if voltage[index + 1] > volt and increasing:
+                maxVolt = voltage[index + 1]
+            elif voltage[index + 1] < volt and increasing:
+                increasing = False
+                APTimes.append(time[index+1])
+                
+            else:
+                increasing = True
     return APTimes
     
 
