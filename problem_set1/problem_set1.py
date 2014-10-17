@@ -85,7 +85,7 @@ def good_AP_finder(time,voltage):
     # about 2ms and call that a spike
     increasing = True
     std = np.std(voltage)
-    threshold = 3 * std
+    threshold = 18 * std
     
     prevVoltage = None
     maxVolt = 0
@@ -166,7 +166,8 @@ def plot_spikes(time,voltage,APTimes,titlestr):
     and indicating the location of detected spikes with red tick marks (|)
     """
     plt.figure()
-    
+    plt.plot(time, voltage)
+    plt.vlines(APTimes, 500, 520, color='r')
     ##Your Code Here    
     
     plt.show()
